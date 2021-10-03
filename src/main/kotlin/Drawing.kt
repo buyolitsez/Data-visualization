@@ -11,6 +11,7 @@ import java.awt.Dimension
 import javax.swing.WindowConstants
 
 fun createWindow(title: String) = runBlocking(Dispatchers.Swing) {
+    logger.info { "Create window" }
     val window = SkiaWindow()
     window.defaultCloseOperation = WindowConstants.DISPOSE_ON_CLOSE
     window.title = title
@@ -35,28 +36,10 @@ class Renderer(private val layer: SkiaLayer): SkiaRenderer {
         val contentScale = layer.contentScale
         canvas.scale(contentScale, contentScale)
 
-        displayTestCircle(canvas)
-
-        layer.needRedraw()
-    }
-
-    private fun displayTestCircle(canvas: Canvas) {
-        var x = 0F
-        val r = 250F
-        val x0 = 300F
-        val y0 = 300F
-        val step = 1F
-        while (x < WINDOW_WIDTH) {
-            var y = 0F
-            while (y < WINDOW_HEIGHT) {
-                y += step
-                if (distanceSq(x, y, x0, y0) <= r * r) {
-                    canvas.drawPoint(x, y, paint)
-                }
-            }
-            x += step
+        when(diagramName) {
+            "circle" -> displayCircleDiagram(canvas, paint)
         }
+        layer.needRedraw()
     }
 }
 
-fun distanceSq(x1: Float, y1: Float, x2: Float, y2: Float) = (x1-x2)*(x1-x2) + (y1-y2)*(y1-y2)
