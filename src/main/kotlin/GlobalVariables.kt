@@ -1,21 +1,20 @@
-
 const val WINDOW_WIDTH = 800
 const val WINDOW_HEIGHT = 600
 val COLORS_HEX = listOf(
-    0xffFFFF00.toInt(),
-    0xff008080.toInt(),
-    0xffC0C0C0.toInt(),
-    0xffFF0000.toInt(),
-    0xff800080.toInt(),
-    0xff808000.toInt(),
-    0xff000080.toInt(),
-    0xff800000.toInt(),
-    0xff00FF00.toInt(),
-    0xff008000.toInt(),
-    0xff808080.toInt(),
-    0xffFF00FF.toInt(),
-    0xff0000FF.toInt(),
-    0xff00FFFF.toInt()
+    0xffFFFF00.toInt(), // Yellow
+    0xff008080.toInt(), // Teal
+    0xffC0C0C0.toInt(), // Silver
+    0xffFF0000.toInt(), // Red
+    0xff800080.toInt(), // Purple
+    0xff808000.toInt(), // Olive
+    0xff000080.toInt(), // Navy
+    0xff800000.toInt(), // Maroon
+    0xff00FF00.toInt(), // Lime
+    0xff008000.toInt(), // Green
+    0xff808080.toInt(), // Gray
+    0xffFF00FF.toInt(), // Fuchsia
+    0xff0000FF.toInt(), // Blue
+    0xff00FFFF.toInt() // Aqua
 )
 
 const val STEP = 1F // step in iterating over coordinates
