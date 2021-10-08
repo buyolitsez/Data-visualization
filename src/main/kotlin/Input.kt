@@ -19,7 +19,7 @@ fun readData() {
 }
 
 fun readDataCircle() {
-    while(inputScanner.hasNextInt()) {
+    while(inputScanner.hasNextFloat()) {
         inputData.add(Data(inputScanner.nextFloat()))
     }
     logger.info {"input data = $inputData"}
