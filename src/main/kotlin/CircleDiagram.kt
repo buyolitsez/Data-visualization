@@ -3,7 +3,7 @@ import org.jetbrains.skija.Paint
 import kotlin.math.PI
 
 fun displayCircleDiagram(canvas: Canvas, paint: Paint) {
-    logger.info {"display circle diagram"}
+    logger.info { "display circle diagram" }
     var x = 0F
     while (x < WINDOW_WIDTH) {
         var y = 0F
@@ -23,14 +23,14 @@ fun circleDiagramDrawPoint(x: Float, y: Float, canvas: Canvas, paint: Paint) {
     inputData.forEach {
         sum += it.value
     }
+    // get angle in radians, where point is
     var angle = kotlin.math.atan2((y - CIRCLE_DIAGRAM_Y0).toDouble(), (x - CIRCLE_DIAGRAM_X0).toDouble())
-    if (angle < 0) {
-        angle += PI * 2F
-    }
-    for (i in inputData.indices) {
-        val currentAngle = inputData[i].value / sum * PI * 2F
+    if (angle < 0) angle += PI * 2F
+    for (index in inputData.indices) {
+        // convert data.value to radians(divide circle into parts)
+        val currentAngle = inputData[index].value / sum * PI * 2F
         if (angle <= currentAngle) {
-            setColor(paint, i)
+            setColor(paint, index)
             break
         } else {
             angle -= currentAngle
