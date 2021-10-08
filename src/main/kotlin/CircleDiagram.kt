@@ -8,14 +8,14 @@ fun displayCircleDiagram(canvas: Canvas, paint: Paint) {
     while (x < WINDOW_WIDTH) {
         var y = 0F
         while (y < WINDOW_HEIGHT) {
-            circleDiagramDrawPoint(canvas, x, y, paint)
+            circleDiagramDrawPoint(x, y, canvas, paint)
             y += STEP
         }
         x += STEP
     }
 }
 
-fun circleDiagramDrawPoint(canvas: Canvas, x: Float, y: Float, paint: Paint) {
+fun circleDiagramDrawPoint(x: Float, y: Float, canvas: Canvas, paint: Paint) {
     if (distanceSq(x, y, CIRCLE_DIAGRAM_X0, CIRCLE_DIAGRAM_Y0) > CIRCLE_DIAGRAM_RADIUS * CIRCLE_DIAGRAM_RADIUS) {
         return
     }
