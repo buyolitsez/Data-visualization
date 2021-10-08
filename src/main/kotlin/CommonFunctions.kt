@@ -1,12 +1,12 @@
 import org.jetbrains.skija.Paint
 import kotlin.random.Random
 
-fun getRandomChar(index: Int) : Int {
+fun getRandomChar(index: Int): Int {
     return Random(index).nextInt() % 256
 }
 
 
-fun distanceSq(x1: Float, y1: Float, x2: Float, y2: Float) = (x1-x2)*(x1-x2) + (y1-y2)*(y1-y2)
+fun distanceSq(x1: Float, y1: Float, x2: Float, y2: Float) = (x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2)
 
 fun setColor(paint: Paint, index: Int) {
     if (index < COLORS_HEX.size) {
