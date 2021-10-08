@@ -37,7 +37,8 @@ class Renderer(private val layer: SkiaLayer): SkiaRenderer {
         canvas.scale(contentScale, contentScale)
 
         when(diagramName) {
-            "circle" -> displayCircleDiagram(canvas, paint)
+            DiagramName.CIRCLE -> displayCircleDiagram(canvas, paint)
+            else -> throwError("Forgot to add diagram type")
         }
         layer.needRedraw()
     }
