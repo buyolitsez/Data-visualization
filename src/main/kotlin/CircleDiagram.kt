@@ -20,7 +20,7 @@ fun circleDiagramDrawPoint(x: Float, y: Float, canvas: Canvas, paint: Paint) {
         return
     }
     var sum = 0F
-    for (it in inputData) {
+    inputData.forEach {
         sum += it.value
     }
     var angle = kotlin.math.atan2((y - CIRCLE_DIAGRAM_Y0).toDouble(), (x - CIRCLE_DIAGRAM_X0).toDouble())
