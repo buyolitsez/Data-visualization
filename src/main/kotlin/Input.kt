@@ -1,6 +1,6 @@
 import java.util.Scanner
 
-data class Data(var value : Float)
+data class Data(var value: Float)
 
 enum class DiagramName {
     CIRCLE,
@@ -12,11 +12,8 @@ val inputData = ArrayList<Data>()
 var diagramName = DiagramName.NONE
 
 fun readData() {
-    val str = readLine()
-    if (str == null) {
-        throwError("Input is null")
-    }
-    when(str) {
+    when (readLine()) {
+        null -> throwError("Input is null")
         "circle" -> readDataCircle()
         else -> throwError("Unknown type of diagram")
     }
@@ -24,10 +21,10 @@ fun readData() {
 
 fun readDataCircle() {
     diagramName = DiagramName.CIRCLE
-    while(inputScanner.hasNextFloat()) {
+    while (inputScanner.hasNextFloat()) {
         inputData.add(Data(inputScanner.nextFloat()))
     }
-    logger.info {"input data = $inputData"}
+    logger.info { "input data = $inputData" }
     if (inputData.isEmpty()) {
         throwError("input data is empty")
     }
