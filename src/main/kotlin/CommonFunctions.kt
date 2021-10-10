@@ -31,3 +31,11 @@ fun setColor(paint: Paint, index: Int) {
         paint.setARGB(255, getRandomChar(index * 3), getRandomChar(index * 3 + 1), getRandomChar(index * 3 + 2))
     }
 }
+
+fun formatFloat(value: Float): String {
+    return String.format("%.${countOfDigitsAfterComma}f", value)
+}
+
+fun convertFontSizeToPixel(fontSize : Float): Float {
+    return fontSize * 0.6f
+}
