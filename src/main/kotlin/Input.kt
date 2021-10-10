@@ -1,4 +1,5 @@
-import java.util.Scanner
+import java.util.*
+import kotlin.collections.ArrayList
 
 data class Data(var value: Float)
 
@@ -12,6 +13,13 @@ val inputData = ArrayList<Data>()
 var diagramName = DiagramName.NONE
 
 fun readData() {
+    println("Write a diagram name")
+    println("Diagram types:")
+    DiagramName.values().forEach { name ->
+        if (name != DiagramName.NONE) {
+            println(name.toString().lowercase(Locale.getDefault()))
+        }
+    }
     when (readLine()) {
         null -> throwError("Input is null")
         "circle" -> readDataCircle()
@@ -21,6 +29,7 @@ fun readData() {
 
 fun readDataCircle() {
     diagramName = DiagramName.CIRCLE
+    println("Write data")
     while (inputScanner.hasNextFloat()) {
         inputData.add(Data(inputScanner.nextFloat()))
     }
