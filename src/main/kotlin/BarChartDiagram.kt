@@ -9,7 +9,7 @@ fun displayBarChartDiagram(canvas: Canvas, paint: Paint) {
     var leftDownX = 5f
     val leftDownY = WINDOW_HEIGHT - 150f
     for ((value, name) in inputData) {
-        paint.setARGB(255, 14, 129, 234)
+        paint.color = BEAUTIFUL_BLUE
         val currentHeight = (value / maxValue) * heightColumn
         drawSquare(
             canvas, paint, arrayOf(
@@ -19,7 +19,7 @@ fun displayBarChartDiagram(canvas: Canvas, paint: Paint) {
                 Point(leftDownX, leftDownY - currentHeight)
             )
         )
-        paint.color = 0xff2C2828.toInt()
+        paint.color = TEXT_COLOR
         font.size = (distanceBetweenTwoColumns + widthColumn) / (name.length).toFloat()
         canvas.drawString(name, leftDownX, leftDownY + font.size, font, paint)
         leftDownX += widthColumn + distanceBetweenTwoColumns

@@ -19,6 +19,8 @@ val COLORS_HEX = listOf(
     0xff0000FF.toInt(), // Blue
     0xff00FFFF.toInt() // Aqua
 )
+const val TEXT_COLOR = 0xff2C2828.toInt()
+const val BEAUTIFUL_BLUE = 0xff0E81EA.toInt()
 
 const val STEP = 1F // step in iterating over coordinates
 
