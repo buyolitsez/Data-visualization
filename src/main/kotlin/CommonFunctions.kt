@@ -4,11 +4,12 @@ import org.jetbrains.skija.Path
 import org.jetbrains.skija.Point
 import kotlin.random.Random
 
+// get random int modulo 256
 fun getRandomChar(index: Int): Int {
     return Random(index).nextInt() % 256
 }
 
-fun drawSquare(canvas: Canvas, paint: Paint, points: Array<Point>) {
+fun drawRectangle(canvas: Canvas, paint: Paint, points: Array<Point>) {
     check(points.size == 4)
     val polygonPath = Path()
     polygonPath.reset()
@@ -20,6 +21,7 @@ fun drawSquare(canvas: Canvas, paint: Paint, points: Array<Point>) {
     canvas.drawPath(polygonPath, paint)
 }
 
+// distance between two points, squared
 fun distanceSq(x1: Float, y1: Float, x2: Float, y2: Float) = (x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2)
 
 fun setColor(paint: Paint, index: Int) {

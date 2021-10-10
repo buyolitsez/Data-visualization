@@ -19,13 +19,13 @@ fun createWindow(title: String) = runBlocking(Dispatchers.Swing) {
     window.layer.renderer = Renderer(window.layer)
 
     window.preferredSize = Dimension(WINDOW_WIDTH, WINDOW_HEIGHT)
-    window.minimumSize = Dimension(WINDOW_WIDTH,WINDOW_HEIGHT)
+    window.minimumSize = Dimension(WINDOW_WIDTH, WINDOW_HEIGHT)
     window.pack()
     window.layer.awaitRedraw()
     window.isVisible = true
 }
 
-class Renderer(private val layer: SkiaLayer): SkiaRenderer {
+class Renderer(private val layer: SkiaLayer) : SkiaRenderer {
     private val paint = Paint().apply {
         color = COLORS_HEX[(COLORS_HEX.indices).random()]
         mode = PaintMode.FILL
@@ -36,7 +36,7 @@ class Renderer(private val layer: SkiaLayer): SkiaRenderer {
         val contentScale = layer.contentScale
         canvas.scale(contentScale, contentScale)
 
-        when(diagramName) {
+        when (diagramName) {
             DiagramName.CIRCLE -> displayCircleDiagram(canvas, paint)
             DiagramName.BAR -> displayBarChartDiagram(canvas, paint)
             else -> throwError("Forgot to add diagram type")
