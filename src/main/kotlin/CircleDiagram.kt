@@ -1,19 +1,43 @@
 import org.jetbrains.skija.*
 import kotlin.math.PI
+import kotlin.math.min
+
+private const val CIRCLE_DIAGRAM_X0 = WINDOW_WIDTH / 3f
+private const val CIRCLE_DIAGRAM_Y0 = WINDOW_HEIGHT / 3f
+private val CIRCLE_DIAGRAM_RADIUS = min(CIRCLE_DIAGRAM_X0, CIRCLE_DIAGRAM_Y0) - 5f
+private const val STEP = 1F // step in iterating over coordinates
 
 private const val distanceBetweenNames = 50f // by Y
-private const val fontSize = 30f
 private const val squareSize = 20f // size of color example square
-private const val borderX = CIRCLE_DIAGRAM_X0 + CIRCLE_DIAGRAM_RADIUS + fontSize
+private val borderX = CIRCLE_DIAGRAM_X0 + CIRCLE_DIAGRAM_RADIUS + 30f
 
 
 fun displayCircleDiagram(canvas: Canvas, paint: Paint) {
     logger.info { "display circle diagram" }
     drawCircle(canvas, paint)
     //draw a description of colors
-    font.size = fontSize
+    drawExampleSquares(canvas, paint)
+    drawNameForValues(canvas, paint)
+}
+
+private fun drawNameForValues(canvas: Canvas, paint: Paint) {
+    val maxNameLen = inputData.maxOf { "${it.paramName}(${it.value})".length }
+    font.size = min((WINDOW_WIDTH - borderX - squareSize) / maxNameLen, 1.5f * squareSize) * 1.6f
     for (index in inputData.indices) {
-        //draw example square
+        paint.color = TEXT_COLOR
+        val y = (index + 1) * distanceBetweenNames
+        canvas.drawString(
+            "${inputData[index].paramName}(${inputData[index].value})",
+            borderX + squareSize,
+            y,
+            font,
+            paint
+        )
+    }
+}
+
+private fun drawExampleSquares(canvas: Canvas, paint: Paint) {
+    for (index in inputData.indices) {
         setColor(paint, index)
         val y = (index + 1) * distanceBetweenNames
         drawRectangle(
@@ -25,15 +49,6 @@ fun displayCircleDiagram(canvas: Canvas, paint: Paint) {
                 Point(borderX + squareSize, y - squareSize),
                 Point(borderX, y - squareSize)
             )
-        )
-        //draw name of value
-        paint.color = TEXT_COLOR
-        canvas.drawString(
-            "${inputData[index].paramName}(${inputData[index].value})",
-            borderX + fontSize,
-            y,
-            font,
-            paint
         )
     }
 }
