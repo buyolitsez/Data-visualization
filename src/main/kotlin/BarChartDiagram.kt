@@ -2,11 +2,9 @@ import org.jetbrains.skija.*
 
 fun displayBarChartDiagram(canvas: Canvas, paint: Paint) {
     logger.info { "display bar chart diagram" }
-    val fontSize = 20f
     val widthColumn = 30f
     val heightColumn = 400f
     val distanceBetweenTwoColumns = 30f
-    font.size = fontSize
     val maxValue = inputData.maxOf { it.value }
     var leftDownX = 5f
     val leftDownY = WINDOW_HEIGHT - 150f
@@ -22,8 +20,8 @@ fun displayBarChartDiagram(canvas: Canvas, paint: Paint) {
             )
         )
         paint.color = 0xff2C2828.toInt()
-        canvas.drawString(name, leftDownX, leftDownY + fontSize, font, paint)
+        font.size = (distanceBetweenTwoColumns + widthColumn) / (name.length).toFloat()
+        canvas.drawString(name, leftDownX, leftDownY + font.size, font, paint)
         leftDownX += widthColumn + distanceBetweenTwoColumns
-
     }
 }
