@@ -20,9 +20,8 @@ fun readData() {
             println(name.toString().lowercase(Locale.getDefault()))
         }
     }
-    val diagram = readLine()
 
-    when (diagram) {
+    when (readLine()) {
         null -> throwError("Input is null")
         "circle" -> diagramName = DiagramName.CIRCLE
         "bar" -> diagramName = DiagramName.BAR
