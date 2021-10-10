@@ -5,10 +5,10 @@ data class Data(val value: Float, val paramName: String)
 
 enum class DiagramName {
     CIRCLE,
+    BAR,
     NONE
 }
 
-val inputScanner = Scanner(System.`in`)
 val inputData = ArrayList<Data>()
 var diagramName = DiagramName.NONE
 
@@ -20,15 +20,18 @@ fun readData() {
             println(name.toString().lowercase(Locale.getDefault()))
         }
     }
-    when (readLine()) {
+    val diagram = readLine()
+
+    when (diagram) {
         null -> throwError("Input is null")
-        "circle" -> readDataCircle()
+        "circle" -> diagramName = DiagramName.CIRCLE
+        "bar" -> diagramName = DiagramName.BAR
         else -> throwError("Unknown type of diagram")
     }
+    readDataArray()
 }
 
-fun readDataCircle() {
-    diagramName = DiagramName.CIRCLE
+fun readDataArray() {
     println("Write data")
     var inputString = readLine()
     while (!inputString.isNullOrEmpty()) {
