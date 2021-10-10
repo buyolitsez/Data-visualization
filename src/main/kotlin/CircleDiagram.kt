@@ -1,5 +1,4 @@
-import org.jetbrains.skija.Canvas
-import org.jetbrains.skija.Paint
+import org.jetbrains.skija.*
 import kotlin.math.PI
 
 fun displayCircleDiagram(canvas: Canvas, paint: Paint) {
@@ -12,6 +11,15 @@ fun displayCircleDiagram(canvas: Canvas, paint: Paint) {
             y += STEP
         }
         x += STEP
+    }
+    val typeface = Typeface.makeFromFile("fonts/JetBrainsMono-Regular.ttf")
+    val font = Font(typeface, 30f)
+    for (index in inputData.indices) {
+        setColor(paint, index)
+        val y = (index + 1) * 50f
+        drawSquare(canvas, paint, arrayOf(Point(500f, y), Point(520f, y), Point(520f, y - 20f), Point(500f, y - 20f)))
+        paint.setARGB(255, 0, 0, 0)
+        canvas.drawString("${inputData[index].paramName}(${inputData[index].value})", 530f, y, font, paint)
     }
 }
 
