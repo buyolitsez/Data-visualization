@@ -1,8 +1,44 @@
 import org.jetbrains.skija.*
 import kotlin.math.PI
 
+private const val distanceBetweenNames = 50f // by Y
+private const val fontSize = 30f
+private const val squareSize = 20f // size of color example square
+private const val borderX = CIRCLE_DIAGRAM_X0 + CIRCLE_DIAGRAM_RADIUS + fontSize
+
+
 fun displayCircleDiagram(canvas: Canvas, paint: Paint) {
     logger.info { "display circle diagram" }
+    drawCircle(canvas, paint)
+    //draw a description of colors
+    font.size = fontSize
+    for (index in inputData.indices) {
+        //draw example square
+        setColor(paint, index)
+        val y = (index + 1) * distanceBetweenNames
+        drawRectangle(
+            canvas,
+            paint,
+            arrayOf(
+                Point(borderX, y),
+                Point(borderX + squareSize, y),
+                Point(borderX + squareSize, y - squareSize),
+                Point(borderX, y - squareSize)
+            )
+        )
+        //draw name of value
+        paint.color = TEXT_COLOR
+        canvas.drawString(
+            "${inputData[index].paramName}(${inputData[index].value})",
+            borderX + fontSize,
+            y,
+            font,
+            paint
+        )
+    }
+}
+
+private fun drawCircle(canvas: Canvas, paint: Paint) {
     var x = 0F
     while (x < WINDOW_WIDTH) {
         var y = 0F
@@ -11,14 +47,6 @@ fun displayCircleDiagram(canvas: Canvas, paint: Paint) {
             y += STEP
         }
         x += STEP
-    }
-    font.size = 30f
-    for (index in inputData.indices) {
-        setColor(paint, index)
-        val y = (index + 1) * 50f
-        drawSquare(canvas, paint, arrayOf(Point(500f, y), Point(520f, y), Point(520f, y - 20f), Point(500f, y - 20f)))
-        paint.setARGB(255, 0, 0, 0)
-        canvas.drawString("${inputData[index].paramName}(${inputData[index].value})", 530f, y, font, paint)
     }
 }
 
