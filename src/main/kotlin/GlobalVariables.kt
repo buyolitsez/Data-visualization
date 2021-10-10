@@ -22,12 +22,14 @@ val COLORS_HEX = listOf(
 const val TEXT_COLOR = 0xff2C2828.toInt()
 const val BEAUTIFUL_BLUE = 0xff0E81EA.toInt()
 
-const val STEP = 1F // step in iterating over coordinates
 
 // Circle diagram constants
 const val CIRCLE_DIAGRAM_RADIUS = 200F
 const val CIRCLE_DIAGRAM_X0 = 250F
 const val CIRCLE_DIAGRAM_Y0 = 250F
+const val STEP = 1F // step in iterating over coordinates
 
 val typeface = Typeface.makeFromFile("fonts/JetBrainsMono-Regular.ttf")
 val font = Font(typeface, 30f)
+
+const val countOfDigitsAfterComma = 2

@@ -2,13 +2,16 @@ import org.jetbrains.skija.*
 
 private const val leftDownY = WINDOW_HEIGHT - 150f
 private const val widthColumn = 30f
-private const val heightColumn = 400f
+private const val heightColumn = (leftDownY) * 0.95f
 private const val distanceBetweenTwoColumns = 30f
+private const val cntOfLineOnGrid = 6
 
 fun displayBarChartDiagram(canvas: Canvas, paint: Paint) {
     logger.info { "display bar chart diagram" }
+    font.size = 12f
+    displayGrid(canvas, paint)
     val maxValue = inputData.maxOf { it.value }
-    var leftDownX = 70f
+    var leftDownX = 5f + convertFontSizeToPixel(font.size) * formatFloat(maxValue).length + 30f
     for ((value, name) in inputData) {
         drawColumn(canvas, paint, value, maxValue, leftDownX)
         drawNameColumn(canvas, paint, name, leftDownX)
@@ -44,4 +47,18 @@ private fun drawColumn(
             Point(leftDownX, leftDownY - currentHeight) // left up
         )
     )
+}
+
+private fun displayGrid(canvas: Canvas, paint: Paint) {
+    paint.color = TEXT_COLOR
+    val maxValue = inputData.maxOf { it.value }
+    val iterateStepValue = maxValue / (cntOfLineOnGrid - 1)
+    val iterateStepY = heightColumn / (cntOfLineOnGrid - 1)
+    for (lineNum in 0 until cntOfLineOnGrid) {
+        val y = leftDownY - iterateStepY * lineNum
+        canvas.drawString(formatFloat(iterateStepValue * lineNum), 5f, y, font, paint)
+        canvas.drawLine(
+            5f + convertFontSizeToPixel(font.size) * formatFloat(maxValue).length, y, WINDOW_WIDTH.toFloat(), y, paint
+        )
+    }
 }
