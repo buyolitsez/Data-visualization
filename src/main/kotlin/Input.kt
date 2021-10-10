@@ -1,7 +1,7 @@
 import java.util.*
 import kotlin.collections.ArrayList
 
-data class Data(var value: Float)
+data class Data(val value: Float, val paramName: String)
 
 enum class DiagramName {
     CIRCLE,
@@ -30,8 +30,15 @@ fun readData() {
 fun readDataCircle() {
     diagramName = DiagramName.CIRCLE
     println("Write data")
-    while (inputScanner.hasNextFloat()) {
-        inputData.add(Data(inputScanner.nextFloat()))
+    var inputString = readLine()
+    while (!inputString.isNullOrEmpty()) {
+        inputData.add(
+            Data(
+                inputString.substringBefore(' ').toFloat(),
+                inputString.substringAfter(' ')
+            )
+        )
+        inputString = readLine()
     }
     logger.info { "input data = $inputData" }
     if (inputData.isEmpty()) {
