@@ -38,6 +38,7 @@ class Renderer(private val layer: SkiaLayer): SkiaRenderer {
 
         when(diagramName) {
             DiagramName.CIRCLE -> displayCircleDiagram(canvas, paint)
+            DiagramName.BAR -> displayBarChartDiagram(canvas, paint)
             else -> throwError("Forgot to add diagram type")
         }
         layer.needRedraw()

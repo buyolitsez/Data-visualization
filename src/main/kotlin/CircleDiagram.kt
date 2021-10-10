@@ -12,8 +12,7 @@ fun displayCircleDiagram(canvas: Canvas, paint: Paint) {
         }
         x += STEP
     }
-    val typeface = Typeface.makeFromFile("fonts/JetBrainsMono-Regular.ttf")
-    val font = Font(typeface, 30f)
+    font.size = 30f
     for (index in inputData.indices) {
         setColor(paint, index)
         val y = (index + 1) * 50f

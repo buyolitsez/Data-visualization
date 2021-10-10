@@ -1,3 +1,6 @@
+import org.jetbrains.skija.Font
+import org.jetbrains.skija.Typeface
+
 const val WINDOW_WIDTH = 800
 const val WINDOW_HEIGHT = 600
 val COLORS_HEX = listOf(
@@ -16,6 +19,8 @@ val COLORS_HEX = listOf(
     0xff0000FF.toInt(), // Blue
     0xff00FFFF.toInt() // Aqua
 )
+const val TEXT_COLOR = 0xff2C2828.toInt()
+const val BEAUTIFUL_BLUE = 0xff0E81EA.toInt()
 
 const val STEP = 1F // step in iterating over coordinates
 
@@ -23,3 +28,6 @@ const val STEP = 1F // step in iterating over coordinates
 const val CIRCLE_DIAGRAM_RADIUS = 200F
 const val CIRCLE_DIAGRAM_X0 = 250F
 const val CIRCLE_DIAGRAM_Y0 = 250F
+
+val typeface = Typeface.makeFromFile("fonts/JetBrainsMono-Regular.ttf")
+val font = Font(typeface, 30f)
