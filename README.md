@@ -36,3 +36,20 @@ Between ```VALUE``` and ```NAME``` should be at least 1 space.
 
 To stop input just press ENTER
 
+---
+
+## Examples
+
+
+
+![circleExample1](examples/circleExample1.png)
+
+![circleExample2](examples/circleExample2.png)
+
+![circleExample3](examples/circleExample3.png)
+
+![barChartExample1](examples/barChartExample1.png)
+
+![barChartExample2](examples/barChartExample2.png)
+
+![barChartExample3](examples/barChartExample3.png)
