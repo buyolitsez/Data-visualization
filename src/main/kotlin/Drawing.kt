@@ -1,14 +1,44 @@
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.swing.Swing
-import org.jetbrains.skija.Canvas
-import org.jetbrains.skija.Paint
-import org.jetbrains.skija.PaintMode
+import org.jetbrains.skija.*
+import org.jetbrains.skija.Data
 import org.jetbrains.skiko.SkiaLayer
 import org.jetbrains.skiko.SkiaRenderer
 import org.jetbrains.skiko.SkiaWindow
 import java.awt.Dimension
+import java.io.IOException
+import java.nio.ByteBuffer
+import java.nio.channels.ByteChannel
+import java.nio.file.Files
+import java.nio.file.Paths
+import java.nio.file.StandardOpenOption
 import javax.swing.WindowConstants
+
+
+var surface: Surface = Surface.makeRasterN32Premul(WINDOW_WIDTH, WINDOW_HEIGHT)
+var surfaceCanvas: Canvas = surface.canvas
+var wasSavedToPng = false
+
+fun saveToPng() {
+    val image: Image = surface.makeImageSnapshot()
+    val pngData: Data? = image.encodeToData(EncodedImageFormat.PNG)
+    check(pngData != null) {println("Something went wrong, cant save to png"); return}
+    val pngBytes: ByteBuffer = pngData.toByteBuffer()
+
+    try {
+        val path = Paths.get("output.png")
+        val channel: ByteChannel = Files.newByteChannel(
+            path,
+            StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.WRITE
+        )
+        channel.write(pngBytes)
+        channel.close()
+    } catch (e: IOException) {
+        println(e)
+    }
+
+}
 
 fun createWindow(title: String) = runBlocking(Dispatchers.Swing) {
     logger.info { "Create window" }
@@ -33,9 +63,15 @@ class Renderer(private val layer: SkiaLayer) : SkiaRenderer {
     }
 
     override fun onRender(canvas: Canvas, width: Int, height: Int, nanoTime: Long) {
+        if (!wasSavedToPng) {
+            paint.color = 0xffFFFFFF.toInt() // White color
+            surfaceCanvas.drawRect(Rect(0f, 0f, WINDOW_WIDTH.toFloat(), WINDOW_HEIGHT.toFloat()), paint) // fill a background white
+            wasSavedToPng = true
+            onRender(surfaceCanvas, width, height, nanoTime) // draw diagram on surface canvas
+            saveToPng()
+        }
         val contentScale = layer.contentScale
         canvas.scale(contentScale, contentScale)
-
         when (diagramName) {
             DiagramName.CIRCLE -> displayCircleDiagram(canvas, paint)
             DiagramName.BAR -> displayBarChartDiagram(canvas, paint)
