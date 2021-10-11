@@ -21,13 +21,13 @@ fun displayCircleDiagram(canvas: Canvas, paint: Paint) {
 }
 
 private fun drawNameForValues(canvas: Canvas, paint: Paint) {
-    val maxNameLen = inputData.maxOf { "${it.paramName}(${it.value})".length }
+    val maxNameLen = inputData.maxOf { "${it.paramName}(${formatFloat(it.value)})".length }
     font.size = min((WINDOW_WIDTH - borderX - squareSize) / maxNameLen, 1.5f * squareSize) * 1.6f
     for (index in inputData.indices) {
         paint.color = TEXT_COLOR
         val y = (index + 1) * distanceBetweenNames
         canvas.drawString(
-            "${inputData[index].paramName}(${inputData[index].value})",
+            "${inputData[index].paramName}(${formatFloat(inputData[index].value)})",
             borderX + squareSize,
             y,
             font,
