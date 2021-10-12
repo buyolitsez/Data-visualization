@@ -1,7 +1,4 @@
-import org.jetbrains.skija.Canvas
 import org.jetbrains.skija.Paint
-import org.jetbrains.skija.Path
-import org.jetbrains.skija.Point
 import kotlin.random.Random
 
 // get random int modulo 256
@@ -26,4 +23,10 @@ fun formatFloat(value: Float): String {
 
 fun convertFontSizeToPixel(fontSize : Float): Float {
     return fontSize * 0.6f
+}
+
+fun outputStringWithColor(string : String) {
+    val color = "\u001B[36m"
+    val reset = "\u001B[0m"
+    print(color + string + reset)
 }
