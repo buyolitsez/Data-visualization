@@ -39,14 +39,7 @@ private fun drawColumn(
 ) {
     paint.color = BEAUTIFUL_BLUE
     val currentHeight = (value / maxValue) * heightColumn // height of current column
-    drawRectangle(
-        canvas, paint, arrayOf(
-            Point(leftDownX, leftDownY), // left down
-            Point(leftDownX + widthColumn, leftDownY), // right down
-            Point(leftDownX + widthColumn, leftDownY - currentHeight), // right up
-            Point(leftDownX, leftDownY - currentHeight) // left up
-        )
-    )
+    canvas.drawRect(Rect(leftDownX, leftDownY, leftDownX + widthColumn, leftDownY - currentHeight), paint)
 }
 
 private fun displayGrid(canvas: Canvas, paint: Paint) {

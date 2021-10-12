@@ -9,18 +9,6 @@ fun getRandomChar(index: Int): Int {
     return Random(index).nextInt() % 256
 }
 
-fun drawRectangle(canvas: Canvas, paint: Paint, points: Array<Point>) {
-    check(points.size == 4)
-    val polygonPath = Path()
-    polygonPath.reset()
-    polygonPath.moveTo(points[0])
-    polygonPath.lineTo(points[1])
-    polygonPath.lineTo(points[2])
-    polygonPath.lineTo(points[3])
-    polygonPath.lineTo(points[0])
-    canvas.drawPath(polygonPath, paint)
-}
-
 // distance between two points, squared
 fun distanceSq(x1: Float, y1: Float, x2: Float, y2: Float) = (x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2)
 

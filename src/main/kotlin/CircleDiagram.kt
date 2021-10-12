@@ -40,16 +40,7 @@ private fun drawExampleSquares(canvas: Canvas, paint: Paint) {
     for (index in inputData.indices) {
         setColor(paint, index)
         val y = (index + 1) * distanceBetweenNames
-        drawRectangle(
-            canvas,
-            paint,
-            arrayOf(
-                Point(borderX, y),
-                Point(borderX + squareSize, y),
-                Point(borderX + squareSize, y - squareSize),
-                Point(borderX, y - squareSize)
-            )
-        )
+        canvas.drawRect(Rect(borderX, y, borderX + squareSize, y - squareSize), paint)
     }
 }
 
