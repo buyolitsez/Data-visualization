@@ -13,14 +13,13 @@ val inputData = ArrayList<Data>()
 var diagramName = DiagramName.NONE
 
 fun readData() {
-    println("Write a diagram name")
     println("Diagram types:")
     DiagramName.values().forEach { name ->
         if (name != DiagramName.NONE) {
             println(name.toString().lowercase(Locale.getDefault()))
         }
     }
-
+    outputStringWithColor("Diagram name: ")
     when (readLine()) {
         null -> throwError("Input is null")
         "circle" -> diagramName = DiagramName.CIRCLE
@@ -32,6 +31,7 @@ fun readData() {
 
 fun readDataArray() {
     println("Write data")
+    outputStringWithColor("data: ")
     var inputString = readLine()
     while (!inputString.isNullOrEmpty()) {
         inputData.add(
@@ -40,6 +40,7 @@ fun readDataArray() {
                 inputString.substringAfter(' ')
             )
         )
+        outputStringWithColor("data: ")
         inputString = readLine()
     }
     logger.info { "input data = $inputData" }
