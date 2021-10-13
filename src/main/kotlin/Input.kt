@@ -33,6 +33,7 @@ fun readDataArray() {
     println("Write data")
     outputStringWithColor("data: ")
     var inputString = readLine()
+    val maxLenOfName = MAX_NAME_LEN[diagramName]!!
     while (!inputString.isNullOrEmpty()) {
         inputData.add(
             Data(
@@ -40,9 +41,9 @@ fun readDataArray() {
                 inputString.substringAfter(' ')
             )
         )
-        if (inputData.last().paramName.length > MAX_NAME_LEN) {
-            assert(MAX_NAME_LEN >= 3)
-            inputData.last().paramName = inputData.last().paramName.take(MAX_NAME_LEN - 3) + "..."
+        if (inputData.last().paramName.length > maxLenOfName) {
+            assert(maxLenOfName >= 3)
+            inputData.last().paramName = inputData.last().paramName.take(maxLenOfName - 3) + "..."
         }
         outputStringWithColor("data: ")
         inputString = readLine()
