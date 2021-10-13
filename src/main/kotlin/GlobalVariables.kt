@@ -28,3 +28,5 @@ val typeface = Typeface.makeFromFile("fonts/JetBrainsMono-Regular.ttf")
 val font = Font(typeface, 30f)
 
 const val countOfDigitsAfterComma = 2
+
+const val MAX_NAME_LEN = 14 // max len name (include commas), should be more than 3
