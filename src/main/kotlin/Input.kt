@@ -1,7 +1,7 @@
 import java.util.*
 import kotlin.collections.ArrayList
 
-data class Data(val value: Float, val paramName: String)
+data class Data(val value: Float, var paramName: String)
 
 enum class DiagramName {
     CIRCLE,
@@ -33,6 +33,7 @@ fun readDataArray() {
     println("Write data")
     outputStringWithColor("data: ")
     var inputString = readLine()
+    val maxLenOfName = MAX_NAME_LEN[diagramName]!!
     while (!inputString.isNullOrEmpty()) {
         inputData.add(
             Data(
@@ -40,6 +41,10 @@ fun readDataArray() {
                 inputString.substringAfter(' ')
             )
         )
+        if (inputData.last().paramName.length > maxLenOfName) {
+            assert(maxLenOfName >= 3)
+            inputData.last().paramName = inputData.last().paramName.take(maxLenOfName - 3) + "..."
+        }
         outputStringWithColor("data: ")
         inputString = readLine()
     }

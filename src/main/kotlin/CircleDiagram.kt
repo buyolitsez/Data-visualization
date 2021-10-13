@@ -7,9 +7,10 @@ private const val CIRCLE_DIAGRAM_Y0 = WINDOW_HEIGHT / 3f
 private val CIRCLE_DIAGRAM_RADIUS = min(CIRCLE_DIAGRAM_X0, CIRCLE_DIAGRAM_Y0) - 5f
 private const val STEP = 1F // step in iterating over coordinates
 
-private const val distanceBetweenNames = 50f // by Y
-private const val squareSize = 20f // size of color example square
-private val borderX = CIRCLE_DIAGRAM_X0 + CIRCLE_DIAGRAM_RADIUS + 30f
+private const val DISTANCE_BETWEEN_TWO_NAMES = 50f // by Y
+private const val SQUARE_SIZE = 20f // size of color example square
+private val BORDER_X = CIRCLE_DIAGRAM_X0 + CIRCLE_DIAGRAM_RADIUS + 30f
+
 
 
 fun displayCircleDiagram(canvas: Canvas, paint: Paint) {
@@ -22,13 +23,13 @@ fun displayCircleDiagram(canvas: Canvas, paint: Paint) {
 
 private fun drawNameForValues(canvas: Canvas, paint: Paint) {
     val maxNameLen = inputData.maxOf { "${it.paramName}(${formatFloat(it.value)})".length }
-    font.size = min((WINDOW_WIDTH - borderX - squareSize) / maxNameLen, 1.5f * squareSize) * 1.6f
+    font.size = min((WINDOW_WIDTH - BORDER_X - SQUARE_SIZE) / maxNameLen, 1.5f * SQUARE_SIZE) * 1.6f
     for (index in inputData.indices) {
         paint.color = TEXT_COLOR
-        val y = (index + 1) * distanceBetweenNames
+        val y = (index + 1) * DISTANCE_BETWEEN_TWO_NAMES
         canvas.drawString(
             "${inputData[index].paramName}(${formatFloat(inputData[index].value)})",
-            borderX + squareSize,
+            BORDER_X + SQUARE_SIZE,
             y,
             font,
             paint
@@ -39,8 +40,8 @@ private fun drawNameForValues(canvas: Canvas, paint: Paint) {
 private fun drawExampleSquares(canvas: Canvas, paint: Paint) {
     for (index in inputData.indices) {
         setColor(paint, index)
-        val y = (index + 1) * distanceBetweenNames
-        canvas.drawRect(Rect(borderX, y, borderX + squareSize, y - squareSize), paint)
+        val y = (index + 1) * DISTANCE_BETWEEN_TWO_NAMES
+        canvas.drawRect(Rect(BORDER_X, y, BORDER_X + SQUARE_SIZE, y - SQUARE_SIZE), paint)
     }
 }
 

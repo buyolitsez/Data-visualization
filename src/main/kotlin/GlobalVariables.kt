@@ -23,8 +23,14 @@ const val TEXT_COLOR = 0xff2C2828.toInt()
 const val BEAUTIFUL_BLUE = 0xff0E81EA.toInt()
 
 
-
 val typeface = Typeface.makeFromFile("fonts/JetBrainsMono-Regular.ttf")
 val font = Font(typeface, 30f)
 
 const val countOfDigitsAfterComma = 2
+
+//const val MAX_NAME_LEN = 14 // max len name (include commas), should be more than 3
+
+val MAX_NAME_LEN = mapOf(
+    DiagramName.CIRCLE to 14,
+    DiagramName.BAR to 5
+    )
