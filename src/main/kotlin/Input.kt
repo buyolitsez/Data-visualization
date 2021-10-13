@@ -1,5 +1,4 @@
 import java.util.*
-import kotlin.collections.ArrayList
 
 data class Data(val value: Float, var paramName: String)
 
@@ -9,7 +8,7 @@ enum class DiagramName {
     NONE
 }
 
-val inputData = ArrayList<Data>()
+var inputData = mutableListOf<Data>()
 var diagramName = DiagramName.NONE
 
 fun readData() {
@@ -51,5 +50,18 @@ fun readDataArray() {
     logger.info { "input data = $inputData" }
     if (inputData.isEmpty()) {
         throwError("input data is empty")
+    }
+    inputData.sortBy { -it.value }
+    reduceInputData()
+}
+
+fun reduceInputData() {
+    var othersSum = 0f
+    while (inputData.size >= COUNT_MAX_VALUES || (inputData.size > 1 && inputData.first().value / inputData.last().value > MAX_RATIO)) {
+        othersSum += inputData.last().value
+        inputData = inputData.dropLast(1).toMutableList()
+    }
+    if (!isEqualsFloat(othersSum, 0f)) {
+        inputData.add(Data(othersSum, "others"))
     }
 }

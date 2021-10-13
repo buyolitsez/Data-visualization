@@ -1,4 +1,5 @@
 import org.jetbrains.skija.Paint
+import java.lang.Math.abs
 import kotlin.random.Random
 
 // get random int modulo 256
@@ -30,3 +31,5 @@ fun outputStringWithColor(string : String) {
     val reset = "\u001B[0m"
     print(color + string + reset)
 }
+
+fun isEqualsFloat(a : Float, b : Float) : Boolean = kotlin.math.abs(a - b) <= EPS_EQUALS

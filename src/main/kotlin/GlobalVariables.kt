@@ -28,6 +28,11 @@ val font = Font(typeface, 30f)
 
 const val countOfDigitsAfterComma = 2
 
+var COUNT_MAX_VALUES = 7 // max value of records, includes others
+var MAX_RATIO = 5f // max ratio of the biggest one and the smallest one
+
+const val EPS_EQUALS = 0.001f // eps, if two values are equal
+
 //const val MAX_NAME_LEN = 14 // max len name (include commas), should be more than 3
 
 val MAX_NAME_LEN = mapOf(
