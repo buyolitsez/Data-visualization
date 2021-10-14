@@ -31,6 +31,7 @@ fun loadDataFromFile() {
     outputStringWithColor("file name: ")
     val fileName = readLine()?.trim()
     check(fileName != null) { throwError("Input is null") }
+    check(File(fileName).exists()) {throwError("File doesn't exist")}
     setDiagramName(File(fileName).readLines()[0])
     for (str in File(fileName).readLines().drop(1)) {
         if (str.isBlank()) continue
