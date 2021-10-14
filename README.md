@@ -11,9 +11,12 @@
 
 You can run the program with IDE
 
-Then you should write commands
+Firstly you should write a command name
 
-First, you should write type of diagram.
++ ```load``` Use this when you want to load data from file
++ ```write``` Use that if you want to write data in IO
+
+Then, you should write type of diagram.
 
 + circle
 + bar
