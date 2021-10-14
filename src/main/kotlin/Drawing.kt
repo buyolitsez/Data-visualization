@@ -20,14 +20,14 @@ var surface: Surface = Surface.makeRasterN32Premul(WINDOW_WIDTH, WINDOW_HEIGHT)
 var surfaceCanvas: Canvas = surface.canvas
 var wasSavedToPng = false
 
-fun saveToPng() {
+fun saveToPng(outFileName : String) {
     val image: Image = surface.makeImageSnapshot()
     val pngData: Data? = image.encodeToData(EncodedImageFormat.PNG)
     check(pngData != null) {println("Something went wrong, cant save to png"); return}
     val pngBytes: ByteBuffer = pngData.toByteBuffer()
 
     try {
-        val path = Paths.get("output.png")
+        val path = Paths.get("$outFileName.png")
         val channel: ByteChannel = Files.newByteChannel(
             path,
             StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING, StandardOpenOption.WRITE
@@ -68,7 +68,7 @@ class Renderer(private val layer: SkiaLayer) : SkiaRenderer {
             surfaceCanvas.drawRect(Rect(0f, 0f, WINDOW_WIDTH.toFloat(), WINDOW_HEIGHT.toFloat()), paint) // fill a background white
             wasSavedToPng = true
             onRender(surfaceCanvas, width, height, nanoTime) // draw diagram on surface canvas
-            saveToPng()
+            saveToPng("output")
         }
         val contentScale = layer.contentScale
         canvas.scale(contentScale, contentScale)
