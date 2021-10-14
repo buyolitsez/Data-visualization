@@ -39,3 +39,4 @@ val MAX_NAME_LEN = mapOf(
     DiagramName.CIRCLE to 14,
     DiagramName.BAR to 5
     )
+
