@@ -1,5 +1,4 @@
 import org.jetbrains.skija.Paint
-import java.lang.Math.abs
 import kotlin.random.Random
 
 // get random int modulo 256

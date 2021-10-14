@@ -1,16 +1,13 @@
 import org.jetbrains.skija.*
-import kotlin.math.PI
 import kotlin.math.min
 
 private const val CIRCLE_DIAGRAM_X0 = WINDOW_WIDTH / 3f
 private const val CIRCLE_DIAGRAM_Y0 = WINDOW_HEIGHT / 3f
 private val CIRCLE_DIAGRAM_RADIUS = min(CIRCLE_DIAGRAM_X0, CIRCLE_DIAGRAM_Y0) - 5f
-private const val STEP = 1F // step in iterating over coordinates
 
 private const val DISTANCE_BETWEEN_TWO_NAMES = 50f // by Y
 private const val SQUARE_SIZE = 20f // size of color example square
 private val BORDER_X = CIRCLE_DIAGRAM_X0 + CIRCLE_DIAGRAM_RADIUS + 30f
-
 
 
 fun displayCircleDiagram(canvas: Canvas, paint: Paint) {
@@ -46,37 +43,24 @@ private fun drawExampleSquares(canvas: Canvas, paint: Paint) {
 }
 
 private fun drawCircle(canvas: Canvas, paint: Paint) {
-    var x = 0F
-    while (x < WINDOW_WIDTH) {
-        var y = 0F
-        while (y < WINDOW_HEIGHT) {
-            circleDiagramDrawPoint(x, y, canvas, paint)
-            y += STEP
-        }
-        x += STEP
-    }
-}
-
-fun circleDiagramDrawPoint(x: Float, y: Float, canvas: Canvas, paint: Paint) {
-    if (distanceSq(x, y, CIRCLE_DIAGRAM_X0, CIRCLE_DIAGRAM_Y0) > CIRCLE_DIAGRAM_RADIUS * CIRCLE_DIAGRAM_RADIUS) {
-        return
-    }
     var sum = 0F
     inputData.forEach {
         sum += it.value
     }
-    // get angle in radians, where point is
-    var angle = kotlin.math.atan2((y - CIRCLE_DIAGRAM_Y0).toDouble(), (x - CIRCLE_DIAGRAM_X0).toDouble())
-    if (angle < 0) angle += PI * 2F
-    for (index in inputData.indices) {
-        // convert data.value to radians(divide circle into parts)
-        val currentAngle = inputData[index].value / sum * PI * 2F
-        if (angle <= currentAngle) {
-            setColor(paint, index)
-            break
-        } else {
-            angle -= currentAngle
-        }
+    var startAngle = 0f
+    inputData.indices.forEach { index ->
+        val currentAngle = inputData[index].value / sum * 360f
+        setColor(paint, index)
+        canvas.drawArc(
+            0f,
+            0f,
+            CIRCLE_DIAGRAM_RADIUS * 2f,
+            CIRCLE_DIAGRAM_RADIUS * 2f,
+            startAngle,
+            currentAngle,
+            true,
+            paint
+        )
+        startAngle += currentAngle
     }
-    canvas.drawPoint(x, y, paint)
 }
