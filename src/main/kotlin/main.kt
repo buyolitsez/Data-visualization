@@ -4,7 +4,7 @@ val logger = KotlinLogging.logger { }
 
 fun main() {
     logger.info { "Start main" }
-    readData()
+    inputCore()
     createWindow("pf-2021-viz")
     logger.info { "End main" }
 }
