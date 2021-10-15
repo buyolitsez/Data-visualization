@@ -1,12 +1,21 @@
 import org.jetbrains.skija.*
 
-private const val leftDownY = WINDOW_HEIGHT - 150f
-private const val widthColumn = 30f
-private const val heightColumn = (leftDownY) * 0.95f
-private const val distanceBetweenTwoColumns = 30f
+var leftDownY = WINDOW_HEIGHT - 150f
+var widthColumn = WINDOW_WIDTH / 25f
+var heightColumn = (leftDownY) * 0.95f
+var distanceBetweenTwoColumns = widthColumn * 0.67f
 private const val cntOfLineOnGrid = 6
 
+private fun recalculateConstants() {
+    leftDownY = WINDOW_HEIGHT - 150f
+    widthColumn = WINDOW_WIDTH / 25f
+    heightColumn = (leftDownY) * 0.95f
+    distanceBetweenTwoColumns = widthColumn * 0.67f
+}
+
+
 fun displayBarChartDiagram(canvas: Canvas, paint: Paint) {
+    recalculateConstants()
     logger.info { "display bar chart diagram" }
     font.size = 12f
     displayGrid(canvas, paint)

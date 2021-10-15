@@ -49,7 +49,7 @@ fun createWindow(title: String) = runBlocking(Dispatchers.Swing) {
     window.layer.renderer = Renderer(window.layer)
 
     window.preferredSize = Dimension(WINDOW_WIDTH, WINDOW_HEIGHT)
-    window.minimumSize = Dimension(WINDOW_WIDTH, WINDOW_HEIGHT)
+    window.minimumSize = Dimension(100, 100)
     window.pack()
     window.layer.awaitRedraw()
     window.isVisible = true
@@ -63,6 +63,8 @@ class Renderer(private val layer: SkiaLayer) : SkiaRenderer {
     }
 
     override fun onRender(canvas: Canvas, width: Int, height: Int, nanoTime: Long) {
+        WINDOW_WIDTH = layer.width
+        WINDOW_HEIGHT = layer.height
         if (!wasSavedToPng) {
             paint.color = 0xffFFFFFF.toInt() // White color
             surfaceCanvas.drawRect(Rect(0f, 0f, WINDOW_WIDTH.toFloat(), WINDOW_HEIGHT.toFloat()), paint) // fill a background white

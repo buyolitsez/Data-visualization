@@ -1,8 +1,8 @@
 import org.jetbrains.skija.Font
 import org.jetbrains.skija.Typeface
 
-const val WINDOW_WIDTH = 800
-const val WINDOW_HEIGHT = 600
+var WINDOW_WIDTH = 800
+var WINDOW_HEIGHT = 600
 val COLORS_HEX = listOf(
     0xffFFFF00.toInt(), // Yellow
     0xff008080.toInt(), // Teal
