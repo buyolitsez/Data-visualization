@@ -1,0 +1,4 @@
+circle
+1000 abacaba
+1000 missisipi
+1000000000000 abracadabra

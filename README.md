@@ -45,14 +45,14 @@ To stop input just press ENTER
 
 
 
-![circleExample1](examples/circleExample1.png)
+![circleExample1](examples/circleExamples/circleExample1.png)
 
-![circleExample2](examples/circleExample2.png)
+![circleExample2](examples/circleExamples/circleExample2.png)
 
-![circleExample3](examples/circleExample3.png)
+![circleExample3](examples/circleExamples/circleExample3.png)
 
-![barChartExample1](examples/barChartExample1.png)
+![barChartExample1](examples/barChartExamples/barChartExample1.png)
 
-![barChartExample2](examples/barChartExample2.png)
+![barChartExample2](examples/barChartExamples/barChartExample2.png)
 
-![barChartExample3](examples/barChartExample3.png)
+![barChartExample3](examples/barChartExamples/barChartExample3.png)
