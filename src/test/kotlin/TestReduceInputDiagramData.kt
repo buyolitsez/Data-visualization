@@ -1,12 +1,11 @@
 import kotlin.test.*
 
-internal class TestReduceInputData {
+internal class TestReduceInputDiagramData {
     private var countMaxValuesOld = 0
     private var maxRatioOld = 0f
 
     @BeforeTest
     fun getConstants() {
-        inputData.clear()
         countMaxValuesOld = COUNT_MAX_VALUES
         maxRatioOld = MAX_RATIO
     }
@@ -18,34 +17,37 @@ internal class TestReduceInputData {
     }
 
     @Test
-    fun testEmpty() {
-        inputData = mutableListOf()
-        reduceInputData()
-        assertContentEquals(mutableListOf(), inputData)
-    }
-
-    @Test
     fun testReduceByCount() {
+        val inputData = mutableListOf<DiagramData>()
         for (i in 0..10) {
-            inputData.add(Data(i.toFloat(), "$i"))
+            inputData.add(DiagramData(i.toFloat(), "$i"))
         }
         inputData.sortBy { -it.value }
         COUNT_MAX_VALUES = 3
         MAX_RATIO = 100f
-        reduceInputData()
-        assertContentEquals(listOf(Data(10f, "10"), Data(9f, "9"), Data(36f, "others")), inputData)
+        assertContentEquals(
+            listOf(DiagramData(10f, "10"), DiagramData(9f, "9"), DiagramData(36f, "others")),
+            reduceInputData(inputData)
+        )
     }
 
     @Test
     fun testReduceByRatio() {
+        val inputData = mutableListOf<DiagramData>()
         for (i in 0..10) {
-            inputData.add(Data(i.toFloat(), "$i"))
+            inputData.add(DiagramData(i.toFloat(), "$i"))
         }
         inputData.sortBy { -it.value }
         COUNT_MAX_VALUES = 15
         MAX_RATIO = 1.4f
-        reduceInputData()
         println(inputData)
-        assertContentEquals(listOf(Data(10f, "10"), Data(9f, "9"), Data(8f, "8"), Data(28f, "others")), inputData)
+        assertContentEquals(
+            listOf(
+                DiagramData(10f, "10"),
+                DiagramData(9f, "9"),
+                DiagramData(8f, "8"),
+                DiagramData(28f, "others")
+            ), reduceInputData(inputData)
+        )
     }
 }

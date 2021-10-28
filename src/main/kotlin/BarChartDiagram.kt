@@ -14,11 +14,11 @@ private fun recalculateConstants() {
 }
 
 
-fun displayBarChartDiagram(canvas: Canvas, paint: Paint) {
+fun displayBarChartDiagram(canvas: Canvas, paint: Paint, inputData: List<DiagramData>) {
     recalculateConstants()
     logger.info { "display bar chart diagram" }
     font.size = 12f
-    displayGrid(canvas, paint)
+    displayGrid(canvas, paint, inputData)
     val maxValue = inputData.maxOf { it.value }
     var leftDownX = 5f + convertFontSizeToPixel(font.size) * formatFloat(maxValue).length + 30f
     for ((value, name) in inputData) {
@@ -51,7 +51,7 @@ private fun drawColumn(
     canvas.drawRect(Rect(leftDownX, leftDownY, leftDownX + widthColumn, leftDownY - currentHeight), paint)
 }
 
-private fun displayGrid(canvas: Canvas, paint: Paint) {
+private fun displayGrid(canvas: Canvas, paint: Paint, inputData: List<DiagramData>) {
     paint.color = TEXT_COLOR
     val maxValue = inputData.maxOf { it.value }
     val iterateStepValue = maxValue / (cntOfLineOnGrid - 1)

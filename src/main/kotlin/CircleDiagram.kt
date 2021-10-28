@@ -18,16 +18,16 @@ private fun recalculateConstants() {
     BORDER_X = CIRCLE_DIAGRAM_X0 + CIRCLE_DIAGRAM_RADIUS + 30f
 }
 
-fun displayCircleDiagram(canvas: Canvas, paint: Paint) {
+fun displayCircleDiagram(canvas: Canvas, paint: Paint, inputData: List<DiagramData>) {
     recalculateConstants()
     logger.info { "display circle diagram" }
-    drawCircle(canvas, paint)
+    drawCircle(canvas, paint, inputData)
     //draw a description of colors
-    drawExampleSquares(canvas, paint)
-    drawNameForValues(canvas, paint)
+    drawExampleSquares(canvas, paint, inputData)
+    drawNameForValues(canvas, paint, inputData)
 }
 
-private fun drawNameForValues(canvas: Canvas, paint: Paint) {
+private fun drawNameForValues(canvas: Canvas, paint: Paint, inputData: List<DiagramData>) {
     val maxNameLen = inputData.maxOf { "${it.paramName}(${formatFloat(it.value)})".length }
     font.size =
         listOf(
@@ -48,7 +48,7 @@ private fun drawNameForValues(canvas: Canvas, paint: Paint) {
     }
 }
 
-private fun drawExampleSquares(canvas: Canvas, paint: Paint) {
+private fun drawExampleSquares(canvas: Canvas, paint: Paint, inputData: List<DiagramData>) {
     for (index in inputData.indices) {
         setColor(paint, index)
         val y = (index + 1) * DISTANCE_BETWEEN_TWO_NAMES
@@ -56,7 +56,7 @@ private fun drawExampleSquares(canvas: Canvas, paint: Paint) {
     }
 }
 
-private fun drawCircle(canvas: Canvas, paint: Paint) {
+private fun drawCircle(canvas: Canvas, paint: Paint, inputData: List<DiagramData>) {
     var sum = 0F
     inputData.forEach {
         sum += it.value
