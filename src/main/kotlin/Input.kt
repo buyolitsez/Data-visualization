@@ -6,6 +6,7 @@ data class DiagramData(val value: Float, var paramName: String)
 enum class DiagramName {
     CIRCLE,
     BAR,
+    SCATTER,
     NONE
 }
 
@@ -25,7 +26,8 @@ fun inputCore(): List<DiagramData> {
     return reduceInputData(inputData)
 }
 
-fun loadDataFromFile() : List<DiagramData> {
+
+fun loadDataFromFile(): List<DiagramData> {
     logger.info { "Load data from file" }
     outputStringWithColor("file name: ")
     val fileName = readLine()?.trim()
@@ -43,7 +45,7 @@ fun loadDataFromFile() : List<DiagramData> {
     return inputData
 }
 
-fun readData() : List<DiagramData> {
+fun readData(): List<DiagramData> {
     logger.info { "load data from IO" }
     println("Diagram types:")
     DiagramName.values().forEach { name ->
@@ -61,6 +63,7 @@ fun setDiagramName(name: String?) {
         null -> throwError("Input is null")
         "circle" -> diagramName = DiagramName.CIRCLE
         "bar" -> diagramName = DiagramName.BAR
+        "scatter" -> diagramName = DiagramName.SCATTER
         else -> throwError("Unknown type of diagram")
     }
 }

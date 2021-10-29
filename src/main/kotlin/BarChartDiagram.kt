@@ -1,9 +1,9 @@
 import org.jetbrains.skija.*
 
-var leftDownY = WINDOW_HEIGHT - 150f
-var widthColumn = WINDOW_WIDTH / 25f
-var heightColumn = (leftDownY) * 0.95f
-var distanceBetweenTwoColumns = widthColumn * 0.67f
+private var leftDownY = WINDOW_HEIGHT - 150f
+private var widthColumn = WINDOW_WIDTH / 25f
+private var heightColumn = (leftDownY) * 0.95f
+private var distanceBetweenTwoColumns = widthColumn * 0.67f
 private const val cntOfLineOnGrid = 6
 
 private fun recalculateConstants() {
