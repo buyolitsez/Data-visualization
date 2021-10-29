@@ -37,6 +37,7 @@ const val EPS_EQUALS = 0.001f // eps, if two values are equal
 
 val MAX_NAME_LEN = mapOf(
     DiagramName.CIRCLE to 14,
-    DiagramName.BAR to 5
+    DiagramName.BAR to 5,
+    DiagramName.SCATTER to Int.MAX_VALUE
     )
 

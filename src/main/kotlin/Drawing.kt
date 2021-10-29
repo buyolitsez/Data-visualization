@@ -80,6 +80,7 @@ class Renderer(private val layer: SkiaLayer, private val inputData: List<Diagram
         when (diagramName) {
             DiagramName.CIRCLE -> displayCircleDiagram(canvas, paint, inputData)
             DiagramName.BAR -> displayBarChartDiagram(canvas, paint, inputData)
+            DiagramName.SCATTER -> displayScatterChartDiagram(canvas, paint, inputData)
             else -> throwError("Forgot to add diagram type")
         }
         layer.needRedraw()

@@ -32,3 +32,17 @@ fun outputStringWithColor(string : String) {
 }
 
 fun isEqualsFloat(a : Float, b : Float) : Boolean = kotlin.math.abs(a - b) <= EPS_EQUALS
+
+fun checkInputParamNamesOnlyNumbers(inputData: List<DiagramData>) {
+    val wasNumbers = mutableSetOf<Float>()
+    for (data in inputData) {
+        val floatValue = data.paramName.toFloatOrNull()
+        if (floatValue == null) {
+            throwError("Parameter name can be only number")
+        } else if (wasNumbers.contains(floatValue)) {
+            throwError("Two parameters can't be equal")
+        } else {
+            wasNumbers.add(floatValue)
+        }
+    }
+}
