@@ -20,10 +20,10 @@ var surface: Surface = Surface.makeRasterN32Premul(WINDOW_WIDTH, WINDOW_HEIGHT)
 var surfaceCanvas: Canvas = surface.canvas
 var wasSavedToPng = false
 
-fun saveToPng(outFileName : String) {
+fun saveToPng(outFileName: String) {
     val image: Image = surface.makeImageSnapshot()
     val pngData: Data? = image.encodeToData(EncodedImageFormat.PNG)
-    check(pngData != null) {println("Something went wrong, cant save to png"); return}
+    check(pngData != null) { println("Something went wrong, cant save to png"); return }
     val pngBytes: ByteBuffer = pngData.toByteBuffer()
 
     try {
@@ -40,13 +40,13 @@ fun saveToPng(outFileName : String) {
 
 }
 
-fun createWindow(title: String) = runBlocking(Dispatchers.Swing) {
+fun createWindow(title: String, inputData: List<DiagramData>) = runBlocking(Dispatchers.Swing) {
     logger.info { "Create window" }
     val window = SkiaWindow()
     window.defaultCloseOperation = WindowConstants.DISPOSE_ON_CLOSE
     window.title = title
 
-    window.layer.renderer = Renderer(window.layer)
+    window.layer.renderer = Renderer(window.layer, inputData)
 
     window.preferredSize = Dimension(WINDOW_WIDTH, WINDOW_HEIGHT)
     window.minimumSize = Dimension(100, 100)
@@ -55,7 +55,7 @@ fun createWindow(title: String) = runBlocking(Dispatchers.Swing) {
     window.isVisible = true
 }
 
-class Renderer(private val layer: SkiaLayer) : SkiaRenderer {
+class Renderer(private val layer: SkiaLayer, private val inputData: List<DiagramData>) : SkiaRenderer {
     private val paint = Paint().apply {
         color = COLORS_HEX[(COLORS_HEX.indices).random()]
         mode = PaintMode.FILL
@@ -67,7 +67,10 @@ class Renderer(private val layer: SkiaLayer) : SkiaRenderer {
         WINDOW_HEIGHT = layer.height
         if (!wasSavedToPng) {
             paint.color = 0xffFFFFFF.toInt() // White color
-            surfaceCanvas.drawRect(Rect(0f, 0f, WINDOW_WIDTH.toFloat(), WINDOW_HEIGHT.toFloat()), paint) // fill a background white
+            surfaceCanvas.drawRect(
+                Rect(0f, 0f, WINDOW_WIDTH.toFloat(), WINDOW_HEIGHT.toFloat()),
+                paint
+            ) // fill a background white
             wasSavedToPng = true
             onRender(surfaceCanvas, width, height, nanoTime) // draw diagram on surface canvas
             saveToPng("output")
@@ -75,8 +78,8 @@ class Renderer(private val layer: SkiaLayer) : SkiaRenderer {
         val contentScale = layer.contentScale
         canvas.scale(contentScale, contentScale)
         when (diagramName) {
-            DiagramName.CIRCLE -> displayCircleDiagram(canvas, paint)
-            DiagramName.BAR -> displayBarChartDiagram(canvas, paint)
+            DiagramName.CIRCLE -> displayCircleDiagram(canvas, paint, inputData)
+            DiagramName.BAR -> displayBarChartDiagram(canvas, paint, inputData)
             else -> throwError("Forgot to add diagram type")
         }
         layer.needRedraw()
