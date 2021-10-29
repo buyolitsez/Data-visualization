@@ -1,13 +1,13 @@
 import org.jetbrains.skija.*
 import kotlin.math.min
 
-var CIRCLE_DIAGRAM_X0 = WINDOW_WIDTH / 3f
-var CIRCLE_DIAGRAM_Y0 = WINDOW_HEIGHT / 3f
-var CIRCLE_DIAGRAM_RADIUS = min(CIRCLE_DIAGRAM_X0, CIRCLE_DIAGRAM_Y0) - 5f
+private var CIRCLE_DIAGRAM_X0 = WINDOW_WIDTH / 3f
+private var CIRCLE_DIAGRAM_Y0 = WINDOW_HEIGHT / 3f
+private var CIRCLE_DIAGRAM_RADIUS = min(CIRCLE_DIAGRAM_X0, CIRCLE_DIAGRAM_Y0) - 5f
 
-var DISTANCE_BETWEEN_TWO_NAMES = WINDOW_HEIGHT / 12f // by Y
-var SQUARE_SIZE = min(WINDOW_WIDTH / 40f, WINDOW_HEIGHT / 30f) // size of color example square
-var BORDER_X = CIRCLE_DIAGRAM_X0 + CIRCLE_DIAGRAM_RADIUS + 30f
+private var DISTANCE_BETWEEN_TWO_NAMES = WINDOW_HEIGHT / 12f // by Y
+private var SQUARE_SIZE = min(WINDOW_WIDTH / 40f, WINDOW_HEIGHT / 30f) // size of color example square
+private var BORDER_X = CIRCLE_DIAGRAM_X0 + CIRCLE_DIAGRAM_RADIUS + 30f
 
 private fun recalculateConstants() {
     CIRCLE_DIAGRAM_X0 = WINDOW_WIDTH / 3f

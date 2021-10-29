@@ -18,7 +18,11 @@ fun setColor(paint: Paint, index: Int) {
 }
 
 fun formatFloat(value: Float): String {
-    return String.format("%.${countOfDigitsAfterComma}f", value)
+    var result = String.format("%.${countOfDigitsAfterComma}f", value)
+    while(result.length > 1 && (result.last() == '.' || result.last() == '0')) {
+        result = result.dropLast(1)
+    }
+    return result
 }
 
 fun convertFontSizeToPixel(fontSize : Float): Float {
